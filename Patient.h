@@ -34,7 +34,12 @@ public:
 
     // Parameterized constructor
     Patient(int patientId, string patientName, int patientAge, CaseType patientCaseType)
-        : id(patientId), name(patientName), age(patientAge), caseType(patientCaseType) {}
+    {
+        id = patientId;
+        name = patientName;
+        age = patientAge;
+        caseType = patientCaseType;
+    }
 
     // Display patient information
     void display() const
