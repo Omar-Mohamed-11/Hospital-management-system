@@ -1,32 +1,30 @@
-// بسم الله الرحمن الرحيم
-// "وَأَنْ لَيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ"
-// Free Palestine
 #include <iostream>
 #include <queue>
 #include <string>
-#include "Patient.h"
+#include "patient.h"
+#include "PatientQueue.h"
 using namespace std;
 class HospitalSystem
 {
 private:
-    queue<Patient> patientQueue;
+    PatientQueue patientQueue;
 
 public:
     HospitalSystem() {}
 
     void AddPatient(const Patient &p)
     {
-        patientQueue.push(p);
+        patientQueue.enqueue(p);
         cout << "Patient added: " << p.getName() << endl;
     }
 
     void ServePatient()
     {
-        if (!patientQueue.empty())
+        if (!patientQueue.isEmpty())
         {
-            Patient p = patientQueue.front();
+            Patient p = patientQueue.next();
             cout << "Serving patient: " << p.getName() << endl;
-            patientQueue.pop();
+            patientQueue.dequeue();
         }
         else
         {
@@ -36,9 +34,9 @@ public:
 
     void ShowNextPatient()
     {
-        if (!patientQueue.empty())
+        if (!patientQueue.isEmpty())
         {
-            Patient p = patientQueue.front();
+            Patient p = patientQueue.next();
             cout << "Next patient: " << p.getName()
                  << ", Age: " << p.getAge() << endl;
             p.display();
@@ -49,50 +47,22 @@ public:
         }
     }
 
-    void SearchPatient(const string &name)
+    void SearchPatient(int id)
     {
-        queue<Patient> temp = patientQueue;
-        bool found = false;
-        while (!temp.empty())
-        {
-            Patient p = temp.front();
-            if (p.getName() == name)
-            {
-                cout << "Found patient: " << p.getName()
-                     << ", Age: " << p.getAge() << endl;
-                p.display();
-                found = true;
-                break;
-            }
-            temp.pop();
-        }
-        if (!found)
+        Patient p = patientQueue.searchPatient(id);
+        if (p.getId() == -1)
         {
             cout << "Patient not found." << endl;
+        }
+        else
+        {
+            cout << "Patient found: " << p.getName() << endl;
+            p.display();
         }
     }
 
     void ShowAllPatients()
     {
-        queue<Patient> temp = patientQueue;
-        if (temp.empty())
-        {
-            cout << "No patients in queue." << endl;
-            return;
-        }
-        cout << "All patients in queue:" << endl;
-        while (!temp.empty())
-        {
-            Patient p = temp.front();
-            cout << "- " << p.getName()
-                 << ", Age: " << p.getAge() << endl;
-            p.display();
-            temp.pop();
-        }
-    }
-
-    void TotalPatients()
-    {
-        cout << "Total patients in queue: " << patientQueue.size() << endl;
+        patientQueue.display();
     }
 };
