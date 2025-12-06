@@ -1,7 +1,10 @@
+// بسم الله الرحمن الرحيم
+// "وَأَنْ لَيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ"
+// Free Palestine
 #include <iostream>
 #include <queue>
 #include <string>
-#include "patient.h"
+#include "Patient.h"
 using namespace std;
 class HospitalSystem
 {

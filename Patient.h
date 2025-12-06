@@ -1,3 +1,6 @@
+// بسم الله الرحمن الرحيم
+// "وَأَنْ لَيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ"
+// Free Palestine
 #ifndef PATIENT_H
 #define PATIENT_H
 
