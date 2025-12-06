@@ -64,22 +64,28 @@ public:
     {
         if (isEmpty())
         {
-            cout << "There are no patients available" << nl;
+            cout << "There are no patients available." << nl;
             return Patient();
         }
-        else if (head == tail)
+        else
         {
-            Patient tempVal = head->patient;
-            delete head;
-            head = tail = nullptr;
-            return tempVal;
+            patientCount--;
+            if (head == tail)
+            {
+                Patient tempVal = head->patient;
+                delete head;
+                head = tail = nullptr;
+                return tempVal;
+            }
+            else
+            {
+                Patient tempVal = head->patient;
+                QueueNode *temp = head;
+                head = head->next;
+                delete temp;
+                return tempVal;
+            }
         }
-
-        Patient tempVal = head->patient;
-        QueueNode *temp = head;
-        head = head->next;
-        delete temp;
-        return tempVal;
     }
 
     // peek to get current patinet which on the top
@@ -87,7 +93,7 @@ public:
     {
         if (isEmpty())
         {
-            cout << "There are no patients available" << nl;
+            cout << "There are no patients available." << nl;
             return Patient();
         }
 
