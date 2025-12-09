@@ -1,3 +1,6 @@
+#ifndef SAFEINPUT_H   
+#define SAFEINPUT_H
+
 #include <bits/stdc++.h>
 #define sp " "
 using namespace std;
@@ -28,3 +31,5 @@ int safe_input_int(int min, int max)
         return choice;
     }
 }
+
+#endif
