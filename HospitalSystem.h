@@ -5,8 +5,7 @@
 #define HOSPITALSYSTEM_H
 
 #include <iostream>
-#include <map>
-#include <string>
+#include <bits/stdc++.h>
 #include "Patient.h"
 #include "PatientQueue.h"
 #include "Doctor.h"
@@ -33,7 +32,6 @@ public:
     // --- Patient Management ---
     void registerPatient();
     void deletePatient();
-    void assignPatientToDoctor();
     void searchPatientByID();
 
     // --- Doctor Management ---
@@ -44,11 +42,11 @@ public:
     void showDoctorQueue();
 
     // --- Core Workflow ---
-    void treatPatient();
-    void patientsCount();
-    void doctorsCount();
-    void displayPatients();
-    void displayDoctors();
+    // void treatPatient();
+    // void patientsCount();
+    // void doctorsCount();
+    // void displayPatients();
+    // void displayDoctors();
 
     // Main menu
     void printMainMenu();
