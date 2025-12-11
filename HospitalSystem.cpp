@@ -362,6 +362,7 @@ void HospitalSystem::doctorsCount()
     cout << "+==================================================+\n";
 }
 
+void HospitalSystem::treatPatient(){}
 // ================= MAIN MENU & PATIENT MENU & DOCTOR MENU & closing =================
 
 void HospitalSystem::printMainMenu() // welcome menu
