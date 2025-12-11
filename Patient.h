@@ -5,6 +5,7 @@
 #define PATIENT_H
 
 #include <bits/stdc++.h>
+#include <iomanip>
 #include "Person.h"
 using namespace std;
 
@@ -28,10 +29,33 @@ public:
     // Override Display
     void display() const override
     {
-        cout << "--- Patient Details ---" << nl;
-        // Call the base class display() to print common info (ID, Name, Age)
-        Person::display();
-        cout << "-----------------------" << nl;
+        string caseTypeStr;
+        switch (caseType)
+        {
+        case GENERAL:
+            caseTypeStr = "GENERAL";
+            break;
+        case EMERGENCY:
+            caseTypeStr = "EMERGENCY";
+            break;
+        case ICU:
+            caseTypeStr = "ICU";
+            break;
+        case PEDIATRIC:
+            caseTypeStr = "PEDIATRIC";
+            break;
+        case SURGICAL:
+            caseTypeStr = "SURGICAL";
+            break;
+        default:
+            caseTypeStr = "UNKNOWN";
+        }
+
+        cout << left;
+        cout << "  ID        : " << id << "\n";
+        cout << "  Name      : " << name << "\n";
+        cout << "  Age       : " << age << "\n";
+        cout << "  Case Type : " << caseTypeStr << "\n";
     }
 };
 

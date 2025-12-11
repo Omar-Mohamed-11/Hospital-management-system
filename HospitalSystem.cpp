@@ -40,6 +40,33 @@ static string readName()
     return s;
 }
 
+string caseTypeTostring(CaseType caseType) // this to conver case type to string
+{
+    string caseTypeStr;
+    switch (caseType)
+    {
+    case GENERAL:
+        caseTypeStr = "GENERAL";
+        break;
+    case EMERGENCY:
+        caseTypeStr = "EMERGENCY";
+        break;
+    case ICU:
+        caseTypeStr = "ICU";
+        break;
+    case PEDIATRIC:
+        caseTypeStr = "PEDIATRIC";
+        break;
+    case SURGICAL:
+        caseTypeStr = "SURGICAL";
+        break;
+    default:
+        caseTypeStr = "UNKNOWN";
+    }
+
+    return caseTypeStr;
+}
+
 // ================= CONSTRUCTOR & DESTRUCTOR (Memory management) =================
 
 HospitalSystem::HospitalSystem() // allocate memory (create list of doctors for each Major)
@@ -138,15 +165,59 @@ void HospitalSystem::registerPatient()
 
     cout << "+==================================================+\n";
 }
-void HospitalSystem::deletePatient() {}
-void HospitalSystem::searchPatientByID() {}
+void HospitalSystem::deletePatient() {}     // sanad
+void HospitalSystem::searchPatientByID() {} // moza
 
 // ================= DOCTOR MANAGEMENT =================
 void HospitalSystem::hireDoctor() {}
 void HospitalSystem::fireDoctor() {}
 void HospitalSystem::searchDoctorByID() {}
 void HospitalSystem::searchDoctorByDepartment() {}
-void HospitalSystem::showDoctorQueue() {}
+void HospitalSystem::showDoctorQueue() {} // sanad
+// ================= DOCTOR MANAGEMENT =================
+void HospitalSystem::displayPatients()
+{
+    cout << "\n";
+    cout << "+==================================================+\n";
+    cout << "|                 ALL PATIENTS LIST                |\n";
+    cout << "+==================================================+\n";
+
+    bool found = false;
+    cout << "================== ASSIGNED PATIENTS ==================\n";
+    for (auto &[maj, doclist] : doctorsByMajor)
+    {
+        ListNode *curr = doclist->getHead();
+        while (curr != nullptr)
+        {
+            if (!curr->Patients.isEmpty())
+            {
+                found = 1;
+                cout << "\n--------------------Doctor Info--------------------\n";
+                cout << "Major: " << caseTypeTostring(curr->doctor.getCaseType()) << nl;
+                cout << "Doctor: " << curr->doctor.getName() << nl;
+                cout << "ID: " << curr->doctor.getId() << nl;
+                cout << "\n---------------------------------------------------\n";
+
+                curr->Patients.display();
+            }
+            curr = curr->next;
+        }
+    }
+
+    if (!found)
+        cout << "No assigned Patients." << nl;
+
+    cout << "\n====================== WAITING LIST ======================\n";
+    if (waiting.isEmpty())
+    {
+        cout << "No patients in waiting list." << nl;
+    }
+    else
+    {
+        waiting.display();
+    }
+    cout << "\n+==================================================+\n";
+}
 
 // ================= MAIN MENU & PATIENT MENU & DOCTOR MENU & closing =================
 
