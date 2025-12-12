@@ -7,6 +7,7 @@
 #include "PatientQueue.h"
 #include "DoctorList.h"
 #include "HospitalSystem.h"
+#include "SafeInput.h"
 
 using namespace std;
 
