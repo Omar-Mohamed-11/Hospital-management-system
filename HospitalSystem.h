@@ -33,8 +33,8 @@ public:
     void searchPatientByID(); // done
 
     // --- Doctor Management ---
-    void hireDoctor();               // under work
-    void fireDoctor();               // under work
+    void hireDoctor();               // done
+    void fireDoctor();               // done
     void searchDoctorByID();         // under work
     void searchDoctorByDepartment(); // under work
     void showDoctorQueue();          // sanad

@@ -528,6 +528,111 @@ void HospitalSystem::doctorManagement() // this to manage doctor
     }
 }
 
+void HospitalSystem::hireDoctor() // hire a new doctor (Omar Mohamed)
+{
+    cout << "\n";
+    cout << "+==================================================+\n";
+    cout << "|                   HIRE NEW DOCTOR                |\n";
+    cout << "+==================================================+\n";
+    cout << "Enter Doctor ID (integer): ";
+    int id = safe_input_int(1, INT_MAX);
+    if (validateId.count(id))
+    {
+        cout << "This Doctor ID already exists! Hired cancelled.\n";
+        return;
+    }
+
+    cout << "Enter Doctor Name: ";
+    string name = readLineTrimmed();
+
+    cout << "Enter Age: ";
+    int age = safe_input_int(0, 150);
+
+    CaseType ct = readCaseType();
+
+    cout << "Enter Years Of Experianece: ";
+    int ex = safe_input_int(0, 80);
+
+    Doctor dr(id, name, age, ct, ex);
+
+    DoctorList *list = doctorsByMajor[ct];
+
+    list->addDoctor(dr);
+
+    validateId[id] = dr;
+
+    cout << "\nDoctor " << name << " Is Hired Successfully.\n";
+
+    cout << "+==================================================+\n";
+}
+
+void HospitalSystem::fireDoctor() // fire a doctor with id (Omar Mohamed)
+{
+    cout << "\n";
+    cout << "+==================================================+\n";
+    cout << "|                    FIRE A DOCTOR                 |\n";
+    cout << "+==================================================+\n";
+    cout << "Enter Doctor ID (integer): ";
+    int id = safe_input_int(1, INT_MAX);
+    if (validateId.count(id) == 0)
+    {
+        cout << "Invalid Id, Please Enter a Correct Doctor Id!\n";
+        return;
+    }
+
+    Person dr = validateId[id];
+    CaseType ct = dr.getCaseType();
+    DoctorList *list = doctorsByMajor[ct];
+
+    if (list->isEmpty() || list->SearchById(id) == nullptr)
+    {
+        cout << "Invalid Id, Please Enter a Correct Doctor Id!\n";
+        return;
+    }
+    else
+    {
+        list->deleteById(id);
+        cout << "\nDoctor " << dr.getName() << " Is Fired.\n";
+        validateId.erase(id);
+    }
+
+    cout << "+==================================================+\n";
+}
+
+void HospitalSystem::deletePatient() {} // sanad
+void HospitalSystem::searchPatientByID()
+{
+    cout << "\n";
+    cout << "+==================================================+\n";
+    cout << "|              SEARCH PATIENT BY ID                |\n";
+    cout << "+==================================================+\n";
+
+    cout << "Enter Patient ID to search: ";
+    int id = safe_input_int(1, INT_MAX);
+
+    // Check if patient exists in the system
+    if (validateId.count(id) == 0)
+    {
+        cout << "\nPatient with ID " << id << " not found in the system.\n";
+        cout << "+==================================================+\n";
+        return;
+    }
+
+    // Get person from validateId map
+    Person person = validateId[id];
+
+    // Display patient information
+    cout << "\n+==================================================+\n";
+    cout << "|               PATIENT INFORMATION                 |\n";
+    cout << "+==================================================+\n";
+    cout << "Patient ID    : " << id << "\n";
+    cout << "Name          : " << person.getName() << "\n";
+    cout << "Age           : " << person.getAge() << "\n";
+    cout << "Case Type     : " << caseTypeTostring(person.getCaseType()) << "\n";
+
+    cout << "\n+==================================================+\n";
+}
+
 void HospitalSystem::run()
 {
     int choice;

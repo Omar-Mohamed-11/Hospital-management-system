@@ -53,7 +53,7 @@ public:
         DoctorsCount++;
     }
 
-     ListNode *SearchById(int DoctorId)
+    ListNode *SearchById(int DoctorId)
     {
         ListNode *curr = head;
 
@@ -66,14 +66,76 @@ public:
             curr = curr->next;
         }
 
-        return nullptr; 
+        return nullptr;
+    }
+
+    void deleteHead() // Support other delete methods (Omar Mohamed)
+    {
+        if (isEmpty())
+        {
+            return;
+        }
+        else if (DoctorsCount == 1)
+        {
+            delete head->next;
+            head = NULL;
+            DoctorsCount--;
+        }
+        else
+        {
+            ListNode *curr = head;
+            head = head->next;
+            delete curr;
+            DoctorsCount--;
+        }
+    }
+
+    Doctor deleteById(int DoctorId) // delete doctor from list with ID (Omar Mohamed)
+    {
+        if (isEmpty())
+        {
+            cout << "There Is No Doctors To Delete!" << nl;
+            return Doctor();
+        }
+        else
+        {
+            if (SearchById(DoctorId) == nullptr)
+            {
+                cout << "Invalid Id, Please Enter a Correct Doctor Id!\n";
+                return Doctor();
+            }
+            else
+            {
+                if (head->doctor.getId() == DoctorId)
+                {
+                    Doctor temp = head->doctor;
+                    deleteHead();
+                    return temp;
+                }
+                else
+                {
+                    ListNode *delNode = head;
+                    ListNode *prev = head;
+                    while (prev->next->doctor.getId() != DoctorId)
+                    {
+                        prev = prev->next;
+                    }
+                    Doctor temp = prev->next->doctor;
+                    delNode=prev->next;
+                    prev->next = delNode->next;
+                    delete delNode;
+                    DoctorsCount--;
+                    return temp;
+                }
+            }
+        }
     }
 
     Doctor dequeue() // This function deletes a doctor.
     {
         if (isEmpty())
         {
-            cout << "There is no Doctor " << nl;
+            cout << "There is no Doctors." << nl;
             return Doctor();
         }
         else
@@ -97,11 +159,12 @@ public:
             }
         }
     }
+
     void display() // This function display doctors queue
     {
         if (isEmpty())
         {
-            cout << "There is no Doctor " << nl;
+            cout << "There is no Doctors." << nl;
             return;
         }
         else
