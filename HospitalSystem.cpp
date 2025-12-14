@@ -180,25 +180,25 @@ void HospitalSystem::deletePatient()
 
     // 1. Search in the General Waiting List (No doctor assigned yet)
     QueueNode *currP = waiting.getHead();
-    if ( waiting.searchPatientbool(id) )
+    if (waiting.searchPatientbool(id))
     {
-        cout << "Patient " << currP->patient.getName() << " has been deleted from the Waiting list\n" ;
-        waiting.removeById( id ) ;
-        return ;
+        cout << "Patient " << currP->patient.getName() << " has been deleted from the Waiting list\n";
+        waiting.removeById(id);
+        return;
     }
-    
+
     // 2. Search in every Doctor's Patient Queue
     // We iterate through every major -> every doctor -> their patient queue
     for (auto &[major, docList] : doctorsByMajor)
     {
         ListNode *currDoc = docList->getHead();
-        while ( currDoc != nullptr )
+        while (currDoc != nullptr)
         {
-            if ( currDoc->Patients.searchPatientbool(id) )
+            if (currDoc->Patients.searchPatientbool(id))
             {
-                cout << "Patient " << currDoc->Patients.searchPatient(id).getName() << " has been deleted from Dr. " << currDoc->doctor.getName() << " queue\n" ;
-                currDoc->Patients.removeById( id ) ;
-                return ;
+                cout << "Patient " << currDoc->Patients.searchPatient(id).getName() << " has been deleted from Dr. " << currDoc->doctor.getName() << " queue\n";
+                currDoc->Patients.removeById(id);
+                return;
             }
         }
     }
@@ -294,7 +294,7 @@ void HospitalSystem::hireDoctor() // hire a new doctor (Omar Mohamed)
     string name = readLineTrimmed();
 
     cout << "Enter Age: ";
-    int age = safe_input_int(0, 150);
+    int age = safe_input_int(18, 150);
 
     CaseType ct = readCaseType();
 
@@ -374,35 +374,35 @@ void HospitalSystem::showDoctorQueue()
     }
     else
     {
-        ListNode *curr = list->getHead() ;
-        while ( curr != nullptr )
+        ListNode *curr = list->getHead();
+        while (curr != nullptr)
         {
-            if ( curr->doctor.getId() == id )
+            if (curr->doctor.getId() == id)
             {
                 cout << "Doctor ID : " << curr->doctor.getId() << "\n";
                 cout << "Name      : " << curr->doctor.getName() << "\n";
-                cout << "\n+=============== Doctor's queue ===============+\n" ;
-                if ( curr->Patients.getQueueCount() == 0 )
+                cout << "\n+=============== Doctor's queue ===============+\n";
+                if (curr->Patients.getQueueCount() == 0)
                 {
-                    cout << "No patients on this doctor's queue\n" ;
+                    cout << "No patients on this doctor's queue\n";
                 }
                 else
                 {
-                    QueueNode *Node = curr->Patients.getHead() ;
+                    QueueNode *Node = curr->Patients.getHead();
                     cout << "| "
-                    << left << setw(5) << "ID"
-                    << "| " << setw(20) << "Name"
-                    << "| " << setw(5) << "Age"
-                    << '\n' ;
-                    cout << "+----------------------------+" ;
-                    while ( Node != nullptr )
+                         << left << setw(5) << "ID"
+                         << "| " << setw(20) << "Name"
+                         << "| " << setw(5) << "Age"
+                         << '\n';
+                    cout << "+----------------------------+";
+                    while (Node != nullptr)
                     {
                         cout << "| "
-                        << left << setw(5) << Node->patient.getId()
-                        << "| " << setw(20) << Node->patient.getName()
-                        << "| " << setw(5) << Node->patient.getAge()
-                        << '\n' ;
-                        Node = Node->next ;
+                             << left << setw(5) << Node->patient.getId()
+                             << "| " << setw(20) << Node->patient.getName()
+                             << "| " << setw(5) << Node->patient.getAge()
+                             << '\n';
+                        Node = Node->next;
                     }
                 }
             }
