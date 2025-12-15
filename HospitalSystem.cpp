@@ -712,8 +712,7 @@ void HospitalSystem::treatPatients()
     cout << "+==================================================+\n";
     cout << "|      The treatment process is successful.        |\n";
     cout << "+==================================================+\n";
-
-} // Omar adel
+}
 
 // ================= MAIN MENU & PATIENT MENU & DOCTOR MENU & closing =================
 
