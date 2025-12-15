@@ -144,6 +144,12 @@ void HospitalSystem::deletePatient()
     cout << "Enter Patient ID to search: ";
     int id = safe_input_int(1, INT_MAX);
 
+    if (!validateId.count(id))
+    {
+        cout << "this id is not found!";
+        return;
+    }
+
     bool found = false;
 
     // 1. Search in the General Waiting List (No doctor assigned yet)
@@ -170,6 +176,8 @@ void HospitalSystem::deletePatient()
             }
         }
     }
+
+    validateId.erase(id);
 
     // 3. If the loop finishes and we haven't returned, the patient was not found
     cout << "\nPatient with ID " << id << " not found in any patient queue.\n";
@@ -327,7 +335,7 @@ void HospitalSystem::hireDoctor() // hire a new doctor (Omar Mohamed)
     cout << "+==================================================+\n";
     cout << "Enter Doctor ID (integer): ";
     int id = safe_input_int(1, INT_MAX);
-    if (validateId.count(id) && validateId[id].getCaseType() != GENERAL && validateId[id].getCaseType() != EMERGENCY && validateId[id].getCaseType() != ICU && validateId[id].getCaseType() != PEDIATRIC && validateId[id].getCaseType() != SURGICAL)
+    if (validateId.count(id))
     {
         cout << "This Doctor ID already exists! Hiring cancelled.\n";
         return;
