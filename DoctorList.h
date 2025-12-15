@@ -77,8 +77,8 @@ public:
         }
         else if (DoctorsCount == 1)
         {
-            delete head->next;
-            head = NULL;
+            delete head;
+            head = tail = nullptr;
             DoctorsCount--;
         }
         else
