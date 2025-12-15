@@ -274,8 +274,6 @@ void HospitalSystem::searchPatientByID()
     cout << "+==================================================+\n";
 }
 
-void HospitalSystem::assignWaitingPatient() {}
-
 // ================= DOCTOR MANAGEMENT =================
 void HospitalSystem::hireDoctor() // hire a new doctor (Omar Mohamed)
 {
@@ -483,24 +481,24 @@ void HospitalSystem::showDoctorQueue()
                 {
                     QueueNode *Node = curr->Patients.getHead();
                     cout << "| "
-                        << left << setw(5) << "ID"
-                        << "| " << setw(20) << "Name"
-                        << "| " << setw(5) << "Age"
-                        << '\n';
+                         << left << setw(5) << "ID"
+                         << "| " << setw(20) << "Name"
+                         << "| " << setw(5) << "Age"
+                         << '\n';
                     cout << "________________________________________________\n";
                     while (Node != nullptr)
                     {
                         cout << "| "
-                            << left << setw(5) << Node->patient.getId()
-                            << "| " << setw(20) << Node->patient.getName()
-                            << "| " << setw(5) << Node->patient.getAge()
-                            << '\n';
+                             << left << setw(5) << Node->patient.getId()
+                             << "| " << setw(20) << Node->patient.getName()
+                             << "| " << setw(5) << Node->patient.getAge()
+                             << '\n';
                         Node = Node->next;
                     }
                 }
-                return ;
+                return;
             }
-            curr = curr->next ;
+            curr = curr->next;
         }
     }
     cout << "+==================================================+\n";
@@ -763,10 +761,6 @@ void HospitalSystem::patientManagement() // this menu to to manage patients
 
         case 3:
             searchPatientByID();
-            break;
-
-        case 4:
-            assignWaitingPatient();
             break;
 
         case 0:
